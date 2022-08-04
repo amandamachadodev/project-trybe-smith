@@ -1,5 +1,5 @@
 import { Pool, ResultSetHeader } from 'mysql2/promise';
-import { IProduct, Product } from '../interfaces';
+import { IProduct, Product, LProduct } from '../interfaces';
 
 class ProductModel {
   public connection: Pool;
@@ -17,6 +17,13 @@ class ProductModel {
     const [dataInserted] = result;
     const { insertId } = dataInserted;
     return { id: insertId, ...product };
+  }
+
+  public async list(): Promise<LProduct[]> {
+    const result = await this.connection
+      .execute('SELECT * FROM Trybesmith.Products');
+    const [rows] = result;
+    return rows as LProduct[];
   }
 }
 
