@@ -10,3 +10,14 @@ export interface Product extends IProduct {
 export interface LProduct extends Product {
   orderId: number;
 }
+
+export interface IUser {
+  username: string;
+  classe: string;
+  level: number;
+  password: string;
+}
+
+export interface User extends IUser {
+  id: number;
+}
