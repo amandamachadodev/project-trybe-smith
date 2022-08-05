@@ -21,3 +21,9 @@ export interface IUser {
 export interface User extends IUser {
   id: number;
 }
+
+export interface Order {
+  id: number;
+  userId: number;
+  productsIds: number;
+}

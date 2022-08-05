@@ -15,8 +15,8 @@ class ProductService {
   };
 
   list = async (): Promise<LProduct[]> => {
-    const books = await this.model.list();
-    return books;
+    const products = await this.model.list();
+    return products;
   };
 }
 
