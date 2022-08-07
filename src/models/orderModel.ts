@@ -10,10 +10,12 @@ class OrderModel {
 
   public async list(): Promise<Order[]> {
     const result = await this.connection
-      .execute(`SELECT O.id, O.userId, P.id AS 'productIds',
-      FROM TrybeSmith.Orders AS O
-      INNER JOIN TrybeSmith.Products AS P
-      ON O.id = P.orderId;`);
+      .execute(`SELECT O.id, O.userId, JSON_ARRAYAGG(P.id) AS 'productsIds'
+      FROM Trybesmith.Orders AS O
+      INNER JOIN Trybesmith.Products AS P
+      ON O.id = P.orderId 
+      GROUP BY O.id
+      ORDER BY O.userId;`);
     const [rows] = result;
     return rows as Order[];
   }
